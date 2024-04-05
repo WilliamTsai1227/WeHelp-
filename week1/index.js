@@ -27,4 +27,6 @@ window.onload = checkWidth;
 
 // 在窗口大小變動時調用
 window.onresize = checkWidth;
+//轉向時觸發
+window.addEventListener("orientationchange", checkWidth);
 
