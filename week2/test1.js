@@ -1,3 +1,18 @@
+// const allStation = /(Songshan|Nanjing Sanmin|Taipei Arena|Nanjing Fuxing|Songjiang Nanjing|Zhongshan|Beimen|Ximen|Xiaonanmen|Chiang Kai-Shek Memorial Hall|Guting|Taipower Building|Gongguan|Wanlong|Jingmei|Dapinglin|Qizhang|Xiaobitan|Xindian City Hall|Xindian)/;
+
+// function searchMessages() {
+// let results = {};
+// for (let person in messages) {
+//     let message = messages[person];
+//     let match = message.match(allStation);
+//     if (match) {
+//     results[person] = match[0];
+//     }
+// }
+// return results;
+// }
+// name_lacation = searchMessages();  //整理出每個姓名對應的站名
+//console.log(name_lacation);
 const allStation1 = /(Songshan|Nanjing Sanmin|Taipei Arena|Nanjing Fuxing|Songjiang Nanjing|Zhongshan|Beimen|Ximen|Xiaonanmen|Chiang Kai-Shek Memorial Hall|Guting|Taipower Building|Gongguan|Wanlong|Jingmei|Dapinglin|Qizhang|Xiaobitan|Xindian City Hall|Xindian)/;
 let allStation2 ={"Songshan": 0,"Nanjing Sanmin": 0,"Taipei Arena": 0,"Nanjing Fuxing": 0,"Songjiang Nanjing": 0,"Zhongshan": 0,"Beimen": 0,"Ximen": 0,"Xiaonanmen": 0,"Chiang Kai-Shek Memorial Hall": 0,"Guting": 0,"Taipower Building": 0,"Gongguan": 0,"Wanlong": 0,"Jingmei": 0,"Dapinglin": 0,"Qizhang": 0,"Xiaobitan": 0,"Xindian City Hall": 0,"Xindian": 0};
 let aaa = [["Songshan", 0],["Nanjing Sanmin",0],["Taipei Arena",0],["Nanjing Fuxing",0],["Songjiang Nanjing",0],["Zhongshan",0],["Beimen",0],["Ximen",0],["Xiaonanmen",0],["Chiang Kai-Shek Memorial Hall",0],["Guting",0],["Taipower Building",0],["Gongguan",0],["Wanlong",0],["Jingmei",0],["Dapinglin",0],["Qizhang",0],["Xiaobitan",0.1],["Xindian City Hall",0],["Xindian",0]];
@@ -63,41 +78,17 @@ function putFriendToStation(){
     return aaa;
 }
 putFriendToStation_result = putFriendToStation();
-//console.log(putFriendToStation_result);
 
-
+let inn = "Xindian"
 //做一個function 當輸入值時的比對
-function mmatch(){
-    let inn = "Songshan"
-    let distance = Infinity;
-    let num = 0;
-    let final_position_num = 0; //最終朋友站號
-    let index = 0; //最終朋友在整條捷運線哪個index 
-    //找到輸入站名對應站號
-    for(let i in putFriendToStation_result){
-        if(inn == putFriendToStation_result[i][0]){ //如果找到對應站名
-           num =  putFriendToStation_result[i][1];//num 為輸入站名對應的站號        
+for(let w in putFriendToStation_result){
+    putFriendToStation_result[w];  //[站名 ,站號碼 ,朋友]
+    if(inn == putFriendToStation_result[w][0]){
+        num = putFriendToStation_result[w][1]
+        if(putFriendToStation_result[w][2]){
+            console.log(putFriendToStation_result[w][2]);
         }
     }
-    if(num == 0){   //如果沒找到輸入對應站號
-        console.log("Input not in MRT line.");
-    }else{                                         //有找到輸入對應站號
-        for(let w in putFriendToStation_result){   //進入捷運線迴圈
-            if(putFriendToStation_result[w][2]){   //如果那個捷運站有朋友了話
-                let compare_distance = Math.abs(putFriendToStation_result[w][1]-num); //計算輸入捷運站與朋友捷運站距離
-                if(compare_distance < distance){ //如果捷運站與朋友捷運站距離比上一個找到的朋友捷運站距離還短
-                    distance = compare_distance; //將distance更新
-                    final_position_num = putFriendToStation_result[w][1]; //將最終朋友站號更新
-                    index = w; //將最終朋友在整條捷運線哪個index更新 
-                }
-            }
-        }
-        console.log(final_position_num);
-        console.log(putFriendToStation_result[index]);
-        console.log(putFriendToStation_result[index][2]);  
-    }
-    
-    
-                                                     
+
 }
-mmatch();
+
