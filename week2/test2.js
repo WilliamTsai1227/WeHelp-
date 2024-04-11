@@ -96,6 +96,7 @@ function price(){
     return final_consultant;
 }
 let ffinal_consultant = price();   //這是最後要找的顧問
+console.log(ffinal_consultant);
 
 
 
@@ -125,18 +126,25 @@ function rate(){
 }
 rate();
 //ffinal_consultant = rate();   //這是最後要找的顧問
+//console.log(rate());
 
 
 //找到預約的顧問，把預約他的時間槓掉
 for(let i in ffinal_consultant){
-    for(let q in available_table){
-        if(ffinal_consultant[i] == q){            //ffinal_consultant[i] 最後要找的顧問名   //q 為table內的人名
+    for(let q in available_table){                //ffinal_consultant[i] 最後要找的顧問名   //q 為table內的人名
+        if(ffinal_consultant[i] == q){            //如果顧問名跟要找顧問對上
             for(let t in book_time){
-                
-            }                                       //available_table[q] 為比對上的人名的現在有空表格
+                for(let tt in available_table[q]){  //available_table[q] 為比對上的人名的現在有空表格
+                    if(book_time[t] ==available_table[q][tt] ){  //如果時間吻合
+                        available_table[q].splice(tt,1);  //把顧問時間移除    
+                        break;
+                    }                                     //有個問題會同時拿掉不只一個人
+                }
+            }                                       
         }
     }
 }
+console.log(available_table);
 
 
 
