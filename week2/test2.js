@@ -91,6 +91,7 @@ function price(){
     for(let i in now_available_consultant){                       //確定最低價錢是多少時，再回去對應有哪些顧問是這些價錢並且印出
         if(now_available_consultant[i]["price"] == lower_price){
             final_consultant.push(now_available_consultant[i]["name"]);
+            break;
         }
     }
     return final_consultant;
@@ -124,28 +125,42 @@ function rate(){
     }
     return final_consultant;
 }
-rate();
+
 //ffinal_consultant = rate();   //這是最後要找的顧問
 //console.log(rate());
 
 
 //找到預約的顧問，把預約他的時間槓掉
-for(let i in ffinal_consultant){
-    for(let q in available_table){                //ffinal_consultant[i] 最後要找的顧問名   //q 為table內的人名
-        if(ffinal_consultant[i] == q){            //如果顧問名跟要找顧問對上
-            for(let t in book_time){
-                for(let tt in available_table[q]){  //available_table[q] 為比對上的人名的現在有空表格
-                    if(book_time[t] ==available_table[q][tt] ){  //如果時間吻合
-                        available_table[q].splice(tt,1);  //把顧問時間移除    
-                        break;
-                    }                                     //有個問題會同時拿掉不只一個人
-                }
-            }                                       
+// for(let i in ffinal_consultant){
+//     for(let q in available_table){                //ffinal_consultant[i] 最後要找的顧問名   //q 為table內的人名
+//         if(ffinal_consultant[i] == q){            //如果顧問名跟要找顧問對上
+//             for(let t in book_time){
+//                 for(let tt in available_table[q]){  //available_table[q] 為比對上的人名的現在有空表格
+//                     if(book_time[t] ==available_table[q][tt] ){  //如果時間吻合
+//                         available_table[q].splice(tt,1);  //把顧問時間移除    
+//                         break;
+//                     }                                     //有個問題會同時拿掉不只一個人
+//                 }
+//             }                                       
+//         }
+//     }
+// }
+
+
+
+
+for (let i in ffinal_consultant) {
+    let consultant = ffinal_consultant[i];
+    if (consultant in available_table) { // 确保顾问存在于 available_table 中
+        for (let t in book_time) {
+            let index = available_table[consultant].indexOf(book_time[t]);
+            if (index !== -1) { // 如果找到了预约的时间
+                available_table[consultant].splice(index, 1); // 从表中移除预约时间
+            }
         }
     }
 }
 console.log(available_table);
-
 
 
 
