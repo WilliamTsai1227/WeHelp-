@@ -34,8 +34,10 @@ let consultants = [
     ];
 
 let input = [consultants, 15, 2, "price"]
+let allInput = [];
 let book_time = [];
 let available_consultant = []
+
 //consultants[0] = {"name":"John", "rate":4.5, "price":1000}
 
 //此function 為比對哪些顧問在預約的時間有空，更新預約的時間book_time及有空的顧問available_consutant
@@ -71,7 +73,7 @@ now_available_consultant =[
     { name: 'Bob', rate: 3, price: 1200 },
     { name: 'Jenny', rate: 3.8, price: 800 },
     { name: 'william', rate: 5, price: 1600 },
-    { name: 'perry', rate: 0, price: 100 },
+    { name: 'perry', rate: 5, price: 100 },
     { name: 'gino', rate: 0, price: 100 },
 ];             
 
@@ -80,6 +82,7 @@ function price(){
     //拿現在有空的顧問去找出最低價格為多少，找到價格後再去印出符合這個價格的顧問有誰（也許不只一位）（顧問一定有空，因為是拿有空顧問名單去跑）
     let lower_price = Infinity;
     let final_consultant = [];
+    let found = false;
     //第一個for迴圈先找到最低價格
     for(let i in now_available_consultant){                       
         if(now_available_consultant[i]["price"] < lower_price){   //now_available_consultant[i] = {"name":"John", "rate":4.5, "price":1000}(舉例)，加一個["price"]直接取出價錢
@@ -91,22 +94,24 @@ function price(){
     for(let i in now_available_consultant){                       //確定最低價錢是多少時，再回去對應有哪些顧問是這些價錢並且印出
         if(now_available_consultant[i]["price"] == lower_price){
             final_consultant.push(now_available_consultant[i]["name"]);
+            found = true;
+        }
+        if(found){
             break;
         }
     }
     return final_consultant;
 }
-let ffinal_consultant = price();   //這是最後要找的顧問
-console.log(ffinal_consultant);
-
-
+// let ffinal_consultant = price();   //這是最後要找的顧問
+// console.log(ffinal_consultant);
 
 
 //如果考慮評價優先了話，執行此function
 function rate(){
     //拿現在有空的顧問去找出最高評價為多少，找到價格後再去印出符合這個價格的顧問有誰（也許不只一位）（顧問一定有空，因為是拿有空顧問名單去跑）
-    let higher_rate = -100000;
+    let higher_rate = -Infinity;
     let final_consultant = [];
+    let found = false;
     //第一個for迴圈先找到最高評價
     for(let i in now_available_consultant){                       
         if(now_available_consultant[i]["rate"] > higher_rate){   //now_available_consultant[i] = {"name":"John", "rate":4.5, "price":1000}(舉例)，加一個["rate"]直接取出評價
@@ -121,13 +126,17 @@ function rate(){
     for(let i in now_available_consultant){                       //確定最高評價是多少時，再回去對應有哪些顧問是這些評價並且印出
         if(now_available_consultant[i]["rate"] == higher_rate){
             final_consultant.push(now_available_consultant[i]["name"]);
+            found = true;
+        }
+        if(found){
+            break;
         }
     }
     return final_consultant;
 }
 
-//ffinal_consultant = rate();   //這是最後要找的顧問
-//console.log(rate());
+ffinal_consultant = rate();   //這是最後要找的顧問
+console.log(rate());
 
 
 //找到預約的顧問，把預約他的時間槓掉
