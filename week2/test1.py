@@ -1,9 +1,10 @@
+#test1
+print("---------------------------------------Test1-------------------------------------------------")
 def find_and_print(messages, current_station):
-    print(current_station)
     import re
     ALL_STATION_1 = ["Songshan ", "Nanjing Sanmin" , "Taipei Arena" , "Nanjing Fuxing" , "Songjiang Nanjing" , "Zhongshan" , "Beimen" , "Ximen" , "Xiaonanmen" , "Chiang Kai-Shek Memorial Hall" , "Guting" , "Taipower Building" , "Gongguan" , "Wanlong" , "Jingmei" , "Dapinglin" , "Qizhang" , "Xiaobitan" , "Xindian City Hall" , "Xindian"]
     aaa = [["Songshan", 0],["Nanjing Sanmin",0],["Taipei Arena",0],["Nanjing Fuxing",0],["Songjiang Nanjing",0],["Zhongshan",0],["Beimen",0],["Ximen",0],["Xiaonanmen",0],["Chiang Kai-Shek Memorial Hall",0],["Guting",0],["Taipower Building",0],["Gongguan",0],["Wanlong",0],["Jingmei",0],["Dapinglin",0],["Qizhang",0],["Xiaobitan",0],["Xindian City Hall",0],["Xindian",0]];
-    num = -1
+    num = -1  #輸入的站名站號
     tidyMessages_result = []
     putFriendToStation_result = []
     #整理messages
@@ -49,16 +50,16 @@ def find_and_print(messages, current_station):
         for w in putFriendToStation_result:
             if current_station == w[0]:
                 num = w[1]
-        if num == -1:   #如果跑到最後還找不到站名
-            print("station input error.")
+        # if num == -1:   #如果跑到最後還找不到站名
+        #     print("station input error.")
         return num
-    match_input() #輸入站名的對應站號結果為num
+    num = match_input() #輸入站名的對應站號結果為num
+    
 
     def distance_calculate():
         min_distance =float('inf')
         if current_station != "Xiaobitan":
             for i in putFriendToStation_result:
-                print(i)
                 if len(i) >= 3:
                     if i[0] == "Xiaobitan":
                         absNum = abs(num - i[1]) +1 
@@ -87,8 +88,9 @@ def find_and_print(messages, current_station):
                             min_distance = roundedNum
                             find_my_friend = i[2]
                             find_my_friend_station = i[0]
-        print("我和朋友的距離", min_distance)
-        print(find_my_friend, find_my_friend_station)
+        #print("我和朋友的距離", min_distance)
+        print(find_my_friend)
+        #print(find_my_friend_station)
     distance_calculate()
 
 messages={
@@ -101,6 +103,7 @@ find_and_print(messages, "Songshan") # print Copper
 find_and_print(messages, "Qizhang") # print Leslie 
 find_and_print(messages, "Ximen") # print Bob 
 find_and_print(messages, "Xindian City Hall") # print Vivian
+
 
 
 
