@@ -214,7 +214,9 @@ def book(consultants, hour, duration, criteria):
     judge = True
 
 consultants=[
-{"name":"John", "rate":4.5, "price":1000}, {"name":"Bob", "rate":3, "price":1200}, {"name":"Jenny", "rate":3.8, "price":800}
+    {"name":"John", "rate":4.5, "price":1000},
+    {"name":"Bob", "rate":3, "price":1200}, 
+    {"name":"Jenny", "rate":3.8, "price":800}
 ]
 book(consultants, 15, 1, "price") # Jenny 
 book(consultants, 11, 2, "price") # Jenny 
