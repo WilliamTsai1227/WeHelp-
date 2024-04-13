@@ -94,8 +94,11 @@ def find_and_print(messages, current_station):
     distance_calculate()
 
 messages={
-"Leslie":"I'm at home near Xiaobitan station.", "Bob":"I'm at Ximen MRT station.",
-"Mary":"I have a drink near Jingmei MRT station.", "Copper":"I just saw a concert at Taipei Arena.", "Vivian":"I'm at Xindian station waiting for you."
+    "Leslie":"I'm at home near Xiaobitan station.", 
+    "Bob":"I'm at Ximen MRT station.",
+    "Mary":"I have a drink near Jingmei MRT station.", 
+    "Copper":"I just saw a concert at Taipei Arena.", 
+    "Vivian":"I'm at Xindian station waiting for you."
 }
 
 find_and_print(messages, "Wanlong") # print Mary 
