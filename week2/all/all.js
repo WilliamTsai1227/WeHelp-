@@ -298,12 +298,7 @@ function book(consultants, hour, duration, criteria){
     }
 
     update_available_table = available_table;
-    judge = true ;
-    
-    
-    
-    
-     
+    judge = true ;     
 }
 const consultants = [
     {"name":"John", "rate":4.5, "price":1000},
