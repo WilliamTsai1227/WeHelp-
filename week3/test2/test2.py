@@ -29,17 +29,28 @@ while True:
                     href = "https://www.ptt.cc"+a_tag.get('href') #文章網址
                     article_time = "" #時間等等拿到，為空就是沒爬到
                     text = a_tag.text #標題
+                    push = 0
                     #進入標題的網站
                     href_req = urllib.request.Request(href,headers=href_headers) #發request
                     href_response = urllib.request.urlopen(href_req) #收response
                     href_content = href_response.read() #讀取response內容
                     href_soup = BeautifulSoup(href_content, 'html.parser') #解析
                     article_metaline = href_soup.findAll('div', class_='article-metaline') #尋找
-                    for i in article_metaline:
+                    for i in article_metaline: #找時間
                         article_meta_tag = i.find("span",class_="article-meta-tag")
                         if article_meta_tag.text == "時間":
                             article_time_tag = i.find("span",class_="article-meta-value")
                             article_time = article_time_tag.text  #最後結果article_time
+                    div_push = href_soup.findAll('div', class_='push') #尋找
+                    for i in div_push: #找推
+                        push_tag = i.find("span",class_="hl push-tag")
+                        if push_tag:
+                            print(push_tag)
+                            if "推" in push_tag.text:
+                                print("push_tag.text")
+                                push += 1
+                    print(push)
+                        
                     print(text , article_time)
     #開始處理取得上一頁標籤網址
     previous_page = ""
