@@ -112,6 +112,7 @@ body{
 .img_block_text{
     font-size: 20px;
     margin-left: 20px;
+    color: azure
 }
 .main_content_row{                  /*佔一整列裡面的1200px div*/
     width: 1200px;
@@ -187,70 +188,70 @@ body{
     width: calc(100% - 20px); /* 調整圖片的寬度 */
     height: calc(100% - 20px); /* 調整圖片的高度 */
     object-fit: cover; /*保持圖片比例，並裁剪超出的部分 */
-    object-position: top 0px right 0px;
+    object-position: center center;
     margin: 10px;
 }
 .img_row_pic_item2{
     width: calc(100% - 20px); /* 調整圖片的寬度 */
     height: calc(100% - 20px); /* 調整圖片的高度 */
     object-fit: cover; /*保持圖片比例，並裁剪超出的部分 */
-    object-position: top 0px right -50px;     
+    object-position: center center;     
     margin: 10px;
 }
 .img_row_pic_item3{
     width: calc(100% - 20px); /* 調整圖片的寬度 */
     height: calc(100% - 20px); /* 調整圖片的高度 */
     object-fit: cover; /*保持圖片比例，並裁剪超出的部分 */
-    object-position: top 0px right -50px;     
+    object-position: center center;     
     margin: 10px;
 }
 .img_row_pic_item4{
     width: calc(100% - 20px); /* 調整圖片的寬度 */
     height: calc(100% - 20px); /* 調整圖片的高度 */
     object-fit: cover; /*保持圖片比例，並裁剪超出的部分 */
-    object-position: top 0px right -50px;     
+    object-position: center center;     
     margin: 10px;
 }
 .img_row_pic_item5{
     width: calc(100% - 20px); /* 調整圖片的寬度 */
     height: calc(100% - 20px); /* 調整圖片的高度 */
     object-fit: cover; /*保持圖片比例，並裁剪超出的部分 */
-    object-position: top 0px right -50px;     
+    object-position: center center;     
     margin: 10px;
 }
 .img_row_pic_item6{
     width: calc(100% - 20px); /* 調整圖片的寬度 */
     height: calc(100% - 20px); /* 調整圖片的高度 */
     object-fit: cover; /*保持圖片比例，並裁剪超出的部分 */
-    object-position: top 0px right 0px;
+    object-position: center center;
     margin: 10px;
 }
 .img_row_pic_item7{
     width: calc(100% - 20px); /* 調整圖片的寬度 */
     height: calc(100% - 20px); /* 調整圖片的高度 */
     object-fit: cover; /*保持圖片比例，並裁剪超出的部分 */
-    object-position: top 0px right -50px;     
+    object-position: center center;     
     margin: 10px;
 }
 .img_row_pic_item8{
     width: calc(100% - 20px); /* 調整圖片的寬度 */
     height: calc(100% - 20px); /* 調整圖片的高度 */
     object-fit: cover; /*保持圖片比例，並裁剪超出的部分 */
-    object-position: top 0px right -50px;     
+    object-position: center center;     
     margin: 10px;
 }
 .img_row_pic_item9{
     width: calc(100% - 20px); /* 調整圖片的寬度 */
     height: calc(100% - 20px); /* 調整圖片的高度 */
     object-fit: cover; /*保持圖片比例，並裁剪超出的部分 */
-    object-position: top 0px right -50px;     
+    object-position: center center;     
     margin: 10px;
 }
 .img_row_pic_item10{
     width: calc(100% - 20px); /* 調整圖片的寬度 */
     height: calc(100% - 20px); /* 調整圖片的高度 */
     object-fit: cover; /*保持圖片比例，並裁剪超出的部分 */
-    object-position: top 0px right -50px;     
+    object-position: center center;     
     margin: 10px;
 }
 .img_row_pic_text1{
@@ -454,6 +455,13 @@ body{
     opacity: 1.0;
     filter:alpha(opacity=100);
 }
+.pic_text{
+    width: 100%;
+    text-align: center;
+    white-space: nowrap; /* 防止文本换行 */
+    overflow: hidden; /* 溢出的文本隐藏 */
+    text-overflow: ellipsis; /* 溢出的文本显示省略号 */
+}
 .star1{
     position: absolute;
     top: 20px;
@@ -529,36 +537,7 @@ body{
     .pic_part10{
         width: calc(100%/2);
     }
-    .img_row_pic_item1{
-        object-position: top 0px right -50px;     
-    }
-    .img_row_pic_item2{
-        object-position: top 0px right -50px;     
-    }
-    .img_row_pic_item3{
-        object-position: top 0px right -50px;     
-    }
-    .img_row_pic_item4{
-        object-position: top 0px right -50px;     
-    }
-    .img_row_pic_item5{
-        object-position: top 0px right -50px;     
-    }
-    .img_row_pic_item6{
-        object-position: top 0px right -50px;     
-    }
-    .img_row_pic_item7{
-        object-position: top 0px right -50px;     
-    }
-    .img_row_pic_item8{
-        object-position: top 0px right -50px;     
-    }
-    .img_row_pic_item9{
-        object-position: top 0px right 0px;     
-    }
-    .img_row_pic_item10{
-        object-position: top 0px right 0px;     
-    }
+
     
 }    
   
@@ -632,36 +611,6 @@ body{
     }
     .pic_part10{
         width: calc(100%);
-    }
-    .img_row_pic_item1{
-        object-position: top 0px right 0px;     
-    }
-    .img_row_pic_item2{
-        object-position: top 0px right 0px;     
-    }
-    .img_row_pic_item3{
-        object-position: top 0px right 0px;     
-    }
-    .img_row_pic_item4{
-        object-position: top 0px right 0px;     
-    }
-    .img_row_pic_item5{
-        object-position: top 0px right 0px;     
-    }
-    .img_row_pic_item6{
-        object-position: top 0px right 0px;     
-    }
-    .img_row_pic_item7{
-        object-position: top 0px right 0px;     
-    }
-    .img_row_pic_item8{
-        object-position: top 0px right 0px;     
-    }
-    .img_row_pic_item9{
-        object-position: top 0px right 0px;     
-    }
-    .img_row_pic_item10{
-        object-position: top 0px right 0px;     
     }
 
     .closelist{

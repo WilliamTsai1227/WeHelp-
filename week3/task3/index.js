@@ -50,52 +50,50 @@ function getData(){
                 //將資料放到stitle_list  大list
                 stitle_list.push(stitle)                
             }
+            let maxPicNum = 10;
             for(let i in stitle_list){
-                if(i < 3){
-                    console.log(stitle_list[i][0]);
-                    console.log(stitle_list[i][1])
-                }
-                
-            }
-
-
-            // for(let i = 1 ; i <=3 ;i++){ //上面三個block
-            //     let img_block = document.querySelector(".img_block"+i.toString()) 
-            //     const img = document.createElement("img");//創造
-            //     img.className="img"+i.toString();
-            //     img.src = stitle_list[i][1]
-            //     const img_block_text = document.createElement("div");
-            //     img_block_text.className ="img_block_text";
-            //     img_block_text.innerText = stitle_list[i][0]
-            //     img_block.appendChild(img)
-            //     img_block.appendChild(img_block_text)
-            // }
+                if(i < 3){  //0,1,2
+                    let classNum = parseInt(i)+1 //caculate the right serial num
+                    let img_content = document.querySelector(".img_block_content");
+                    let img_block = document.createElement("div");
+                    img_block.className = "img_block"+classNum
+                    let img = document.createElement("img");//create a img tag
+                    img.className="img1"; 
+                    img.src = stitle_list[i][1];
+                    console.log(img)
+                    let img_block_text = document.createElement("div");//create a div tag
+                    img_block_text.className = "img_block_text"
+                    img_block_text.innerText = stitle_list[i][0];
+                    console.log(img_block_text)
+                    img_content.appendChild(img_block)
+                    img_block.appendChild(img);
+                    img_block.appendChild(img_block_text);
+                }else if(3 <= i < maxPicNum){                 //remeber index is start from 0 ,so need to use < ,not <=
+                    let classNum = parseInt(i)-2   //caculate the right serial num
+                    let pic_block = document.querySelector(".pic_part"+(classNum).toString());
+                    let img_item = document.createElement("img"); //create a img tag
+                    img_item.className="img_row_pic_item"+(classNum).toString();  //the i(index) start form 3, but we need 1,so minus 2
+                    img_item.src = stitle_list[i][1];  //we need to take the url from index3 , so don't need minus
+                    let img_text_block = document.createElement("div"); //create a img_text_block tag
+                    img_text_block.className = "img_row_pic_text"+(classNum).toString();//the i(index) start form 3, but we need 1,so minus 2
+                    let img_text_content = document.createElement("div"); //create a img_text_content tag
+                    img_text_content.className = "pic_text"
+                    img_text_content.innerText = stitle_list[i][0];  //we need to take the spot text (start with-> stitle_list-> index3 [position 0])
+                    pic_block.appendChild(img_item);
+                    pic_block.appendChild(img_text_block);
+                    img_text_block.appendChild(img_text_content);   // add element to the right position
+                }                
+            } 
     });
     
     
 }
-getData();
 
-
-
-
-
-
-    
-
-function find_cret_add_ele(){
-
-    
-
-}
 
 
 // 在頁面加載完成時調用
 window.onload = checkWidth;
-
-
-
-
+window.onload = getData;
 
 
 // 在窗口大小變動時調用
