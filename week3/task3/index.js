@@ -34,28 +34,42 @@ function getData(){
                 let spot = spot_list[i].stitle
                 let spot_url = spot_list[i].filelist
                 // 提取以 .jpg 或 .JPG 結尾的字串
-                let regex = /https?:\/\/[^ ]+\.jpg/;
-                let matches = regex.exec(spot_url);
-                // console.log(spot)
-                // console.log(matches);
+                let index_jpg = spot_url.toLowerCase().indexOf('.jpg'); // 網址處理開始
+                let index_jpeg = spot_url.toLowerCase().indexOf('.jpeg');
+                let img_url;
+                if (index_jpg !== -1) {
+                    img_url = spot_url.slice(0, index_jpg + 4); // first_url才是要拿的網址
+                } else if (index_jpeg !== -1) {
+                    img_url = spot_url.slice(0, index_jpeg + 5);
+                } else {
+                    img_url = " "; // 網址處理結束
+                }
                 //將資料放到stitle  [] 個別景點小list
                 stitle.push(spot);
-                stitle.push(matches[0]);
-                console.log(matches[0])
+                stitle.push(img_url);
                 //將資料放到stitle_list  大list
                 stitle_list.push(stitle)                
             }
-            for(let i = 1 ; i <=3 ;i++){ //上面三個block
-                let img_block = document.querySelector(".img_block"+i.toString()) 
-                const img = document.createElement("img");//創造
-                img.className="img"+i.toString();
-                img.src = stitle_list[i][1]
-                const img_block_text = document.createElement("div");
-                img_block_text.className ="img_block_text";
-                img_block_text.innerText = stitle_list[i][0]
-                img_block.appendChild(img)
-                img_block.appendChild(img_block_text)
+            for(let i in stitle_list){
+                if(i < 3){
+                    console.log(stitle_list[i][0]);
+                    console.log(stitle_list[i][1])
+                }
+                
             }
+
+
+            // for(let i = 1 ; i <=3 ;i++){ //上面三個block
+            //     let img_block = document.querySelector(".img_block"+i.toString()) 
+            //     const img = document.createElement("img");//創造
+            //     img.className="img"+i.toString();
+            //     img.src = stitle_list[i][1]
+            //     const img_block_text = document.createElement("div");
+            //     img_block_text.className ="img_block_text";
+            //     img_block_text.innerText = stitle_list[i][0]
+            //     img_block.appendChild(img)
+            //     img_block.appendChild(img_block_text)
+            // }
     });
     
     
