@@ -22,42 +22,67 @@ function checkWidth() {
         openMu.className = "menu_icon"; //第一和第二畫面皆為display:none,手機畫面才會dispaly:flex
     } 
 }
-let stitle_list = [];
+
 function getData(){
-    //利用fetch連線並取得資料
     fetch("https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment-1").then(function(response){
         return response.json();
     }).then(function(data){
-        console.log(data);
+        let stitle_list = [];
         let spot_list = data.data.results;
             for(let i in spot_list){
                 let stitle = []
-                stitle.push(spot_list[i].stitle);
-                stitle.push(spot_list[i].filelis);
-                stitle_list.push(stitle)
+                let spot = spot_list[i].stitle
+                let spot_url = spot_list[i].filelist
+                // 提取以 .jpg 或 .JPG 結尾的字串
+                let regex = /https?:\/\/[^ ]+\.jpg/;
+                let matches = regex.exec(spot_url);
+                // console.log(spot)
+                // console.log(matches);
+                //將資料放到stitle  [] 個別景點小list
+                stitle.push(spot);
+                stitle.push(matches[0]);
+                console.log(matches[0])
+                //將資料放到stitle_list  大list
+                stitle_list.push(stitle)                
             }
+            for(let i = 1 ; i <=3 ;i++){ //上面三個block
+                let img_block = document.querySelector(".img_block"+i.toString()) 
+                const img = document.createElement("img");//創造
+                img.className="img"+i.toString();
+                img.src = stitle_list[i][1]
+                const img_block_text = document.createElement("div");
+                img_block_text.className ="img_block_text";
+                img_block_text.innerText = stitle_list[i][0]
+                img_block.appendChild(img)
+                img_block.appendChild(img_block_text)
+            }
+    });
+    
+    
+}
+getData();
 
-        //已經取的資料，要把資料呈現到畫面上
-        //let result = document.querySelector(".parent")
-        //result.innerHTML = "";   //每次點按時便先把畫面清空
-        // for(let i = 0;i < 8;i++){
-        //     let site = data.result.results[i];
-        //     console.log(site);
-        //     console.log(site.stitle);
-            //result.innerHTML +="<div>"+site.stitle+"</div>"
-        // };
-    });   
+
+
+
+
+
+    
+
+function find_cret_add_ele(){
+
+    
+
 }
 
-// function getEle(){
-//     let eleee = document.querySelector("body");
-//     console.log(eleee);
-// }
-// getData();
+
 // 在頁面加載完成時調用
 window.onload = checkWidth;
-window.onload = getData;
-console.log(stitle_list)
+
+
+
+
+
 
 // 在窗口大小變動時調用
 window.onresize = checkWidth;
