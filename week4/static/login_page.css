@@ -1,0 +1,100 @@
+body{
+    margin: 0px;
+}
+#login_block{
+    flex: none;
+    display: grid;
+    grid-template-rows: 30% 60%;
+    width: 100%;
+    border: solid;
+    border-color: gray;
+    border-width:1px ;
+}
+#title_block{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    background-color: rgb(41, 34, 101);
+    width: 100%;
+    height: 100px;
+}
+#title_content{
+    color: aliceblue;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#content_block{
+    display: block;
+    grid-template-rows: 1fr 3fr ;
+    width: 100%;
+    height: 250px;
+    justify-content: center;
+    align-items: center;
+}
+#login_system_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+}
+#login_input_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+#login_input_form{
+    display: block;
+    width: 500px;
+    margin-left: (100% - 500px) / 2;
+    margin-right: (100% - 500px) / 2;
+}
+#account{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+}
+#password{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+}
+#check_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 35px;    
+}
+#password_text{
+    text-align: center;
+    font-size: 18px;
+    width: 45px;
+}
+#account_text{
+    text-align: center;
+    font-size: 18px;
+    width: 45px;
+}
+#check_box_text{
+    text-align: center;
+    font-size: 16px;
+    width: 80px;
+}
+#button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+}
+#login_button{
+    width: 50px;
+}
