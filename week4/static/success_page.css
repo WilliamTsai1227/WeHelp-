@@ -4,10 +4,7 @@ body{
 #login_block{
     flex: none;
     display: grid;
-    grid-template-rows: 30% 60%;
     width: 100%;
-    border: solid;
-    border-color: gray;
     border-width:1px ;
 }
 #title_block{
@@ -26,7 +23,7 @@ body{
 
 #content_block{
     display: block;
-    grid-template-rows: 1fr 3fr ;
+    margin-top: 30px;
     width: 100%;
     height: 250px;
     justify-content: center;
@@ -39,4 +36,12 @@ body{
     width: 100%;
     height: 50px;
     font-size: 20px;
+}
+#logout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    font-size: 20px; 
 }
