@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/error_page.css">
-    <title>Login page</title>
+    <title>登入失敗頁面</title>
 </head>
 <body>
     <div id="login_block">
-        <div id="title_block">
-            <div id="title_content">失敗頁面</div>
-        </div>
+        <div id="title_block"><div id="title_content">失敗頁面</div></div>
         <div id="content_block">
-            <div id="login_system_div">{{error_message}}</div>
+            <div id="error_system_div">{{error_message}}</div>
+            <div id="back_to_login_page"><a href="/logout">返回首頁</a></div>
         </div>
     </div>
 </body>
