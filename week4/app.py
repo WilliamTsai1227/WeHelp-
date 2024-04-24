@@ -36,7 +36,7 @@ async def member(request: Request,response_class=HTMLResponse):
     if "SIGNED-IN" not in request.session:
         request.session["SIGNED-IN"] = False
     if request.session["SIGNED-IN"] != True:
-        return RedirectResponse(url="/", status_code=303,)
+        return RedirectResponse(url="/")
     else:
         return templates.TemplateResponse("success_page.html", {"request": request})
 
@@ -50,14 +50,14 @@ async def error(request: Request,message: str=None,response_class=HTMLResponse):
     elif message == "帳號、或密碼輸入錯誤":
         return templates.TemplateResponse("error_page.html",{"error_message": message,"request": request})
     else:
-        return RedirectResponse(url="/", status_code=303,)
+        return RedirectResponse(url="/")
 
 
 
 @app.get("/logout")
 async def logout(request: Request):
     request.session["SIGNED-IN"] = False
-    return RedirectResponse(url="/", status_code=303)
+    return RedirectResponse(url="/")
 
 
     
