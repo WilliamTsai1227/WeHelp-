@@ -23,9 +23,11 @@ async def home(request: Request):
 async def signin(request: Request,account: str= Form(None), password: str= Form(None)):
     if account is None or password is None:
         error_message = "請輸入帳號、密碼"
+        request.session["SIGNED-IN"] = False
         return RedirectResponse(url=f"/error?message={error_message}", status_code=303)
     elif account != "test" or password != "test":
         error_message = "帳號、或密碼輸入錯誤"
+        request.session["SIGNED-IN"] = False
         return RedirectResponse(url=f"/error?message={error_message}", status_code=303)
     elif account == "test" or password == "test":
         request.session["SIGNED-IN"] = True
@@ -42,12 +44,10 @@ async def member(request: Request):
 
 @app.get("/error")
 async def error(request: Request,message: str=None):
-    if message == "請輸入帳號、密碼":
-        return templates.TemplateResponse("Error_page.html",{"error_message": message ,"request": request})
-    elif message == "帳號、或密碼輸入錯誤":
-        return templates.TemplateResponse("Error_page.html",{"error_message": message,"request": request})
-    else:
+    if message == None:
         return RedirectResponse(url="/")
+    else:
+        return templates.TemplateResponse("Error_page.html",{"error_message": message,"request": request})
 
 @app.get("/signout")
 async def logout(request: Request):
@@ -55,5 +55,10 @@ async def logout(request: Request):
     return RedirectResponse(url="/")
 
 
+@app.get("/square/{positive_number}")
+async def square(request: Request, positive_number: str):
+     Squared = str(int(positive_number) ** 2)
+     result = str(Squared)
+     return templates.TemplateResponse("Squared_Number_Page.html", {"Squared_Num": result, "request": request})
     
 
