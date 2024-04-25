@@ -37,7 +37,7 @@ body{
     height: 50px;
     font-size: 20px;
 }
-#logout{
+#signout{
     display: flex;
     justify-content: center;
     align-items: center;
