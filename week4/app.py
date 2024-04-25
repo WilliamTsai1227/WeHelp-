@@ -13,20 +13,22 @@ app.add_middleware(SessionMiddleware, secret_key="secret")
 
 @app.get("/")
 async def home(request: Request):
-    return templates.TemplateResponse("home_page.html",{"request": request})
+    if "SIGNED-IN" not in request.session or request.session["SIGNED-IN"] != True : #如果尚未登入，顯示home page
+        return templates.TemplateResponse("Home_page.html",{"request": request})
+    elif request.session["SIGNED-IN"] == True : #如果已經登入了顯示會員頁
+        return templates.TemplateResponse("Success_page.html", {"request": request})
+
 
 
 @app.post("/signin")
 async def signin(request: Request,account: str= Form(None), password: str= Form(None)):
     if account is None or password is None:
         error_message = "請輸入帳號、密碼"
-        request.session["SIGNED-IN"] = False
         return RedirectResponse(url=f"/error?message={error_message}", status_code=303)
     elif account != "test" or password != "test":
         error_message = "帳號、或密碼輸入錯誤"
-        request.session["SIGNED-IN"] = False
         return RedirectResponse(url=f"/error?message={error_message}", status_code=303)
-    else:
+    elif account == "test" or password == "test":
         request.session["SIGNED-IN"] = True
         return RedirectResponse(url="/member", status_code=303)
 
@@ -37,16 +39,16 @@ async def member(request: Request):
     if "SIGNED-IN" not in request.session or request.session["SIGNED-IN"] != True :
         return RedirectResponse(url="/")
     else:
-        return templates.TemplateResponse("success_page.html", {"request": request})
+        return templates.TemplateResponse("Success_page.html", {"request": request})
 
 
 
 @app.get("/error")
 async def error(request: Request,message: str=None):
     if message == "請輸入帳號、密碼":
-        return templates.TemplateResponse("error_page.html",{"error_message": message ,"request": request})
+        return templates.TemplateResponse("Error_page.html",{"error_message": message ,"request": request})
     elif message == "帳號、或密碼輸入錯誤":
-        return templates.TemplateResponse("error_page.html",{"error_message": message,"request": request})
+        return templates.TemplateResponse("Error_page.html",{"error_message": message,"request": request})
     else:
         return RedirectResponse(url="/")
 
