@@ -9,3 +9,18 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    let countButton = document.querySelector("#count_button");
+    let NumberInput = document.querySelector("#positive_number input[type='int']");
+    countButton.addEventListener("click", function(event) {
+        let inputValue = NumberInput.value.trim(); // 去除首尾空格
+        let isPositiveInteger =  Number.isInteger(Number(inputValue)) && Number(inputValue) > 0;
+        if (!isPositiveInteger) {
+            event.preventDefault(); 
+            alert("Please enter a positive integer.");
+        }else{
+            window.location.href = `/square/${inputValue}`;
+        }
+    });
+});
