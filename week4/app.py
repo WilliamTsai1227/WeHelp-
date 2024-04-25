@@ -44,10 +44,7 @@ async def member(request: Request):
 
 @app.get("/error")
 async def error(request: Request,message: str=None):
-    if message == None:
-        return RedirectResponse(url="/")
-    else:
-        return templates.TemplateResponse("Error_page.html",{"error_message": message,"request": request})
+    return templates.TemplateResponse("Error_page.html",{"error_message": message,"request": request})
 
 @app.get("/signout")
 async def logout(request: Request):
@@ -57,8 +54,7 @@ async def logout(request: Request):
 
 @app.get("/square/{positive_number}")
 async def square(request: Request, positive_number: str):
-     Squared = str(int(positive_number) ** 2)
-     result = str(Squared)
+     result = str(int(positive_number) ** 2)
      return templates.TemplateResponse("Squared_Number_Page.html", {"Squared_Num": result, "request": request})
     
 
