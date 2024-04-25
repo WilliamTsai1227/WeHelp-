@@ -19,7 +19,6 @@ async def home(request: Request):
         return templates.TemplateResponse("Success_page.html", {"request": request})
 
 
-
 @app.post("/signin")
 async def signin(request: Request,account: str= Form(None), password: str= Form(None)):
     if account is None or password is None:
@@ -33,14 +32,12 @@ async def signin(request: Request,account: str= Form(None), password: str= Form(
         return RedirectResponse(url="/member", status_code=303)
 
 
-
 @app.get("/member")
 async def member(request: Request):    
-    if "SIGNED-IN" not in request.session or request.session["SIGNED-IN"] != True :
+    if "SIGNED-IN" not in request.session or request.session["SIGNED-IN"] == False :
         return RedirectResponse(url="/")
-    else:
+    elif  request.session["SIGNED-IN"] == True:
         return templates.TemplateResponse("Success_page.html", {"request": request})
-
 
 
 @app.get("/error")
@@ -51,7 +48,6 @@ async def error(request: Request,message: str=None):
         return templates.TemplateResponse("Error_page.html",{"error_message": message,"request": request})
     else:
         return RedirectResponse(url="/")
-
 
 @app.get("/signout")
 async def logout(request: Request):
