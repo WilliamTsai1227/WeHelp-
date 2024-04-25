@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/home_page.css">
+    <script src="/static/home_page.js" defer></script>
+    <title>登入頁面</title>
+</head>
+<body>
+    <div id="login_block">
+        <div id="title_block">
+            <div id="title_content">歡迎光臨，請輸入帳號密碼</div>
+        </div>
+        <div id="content_block">
+            <div id="login_system_div">登入系統</div>
+            <div id="login_input_div">
+                <form id="login_input_form"action="/signin" method="post">
+                    <div id="account"><span id="account_text">帳號</span><input type="text" name="account"></div>   
+                    <div id="password"><span id="password_text">密碼</span><input type="password" name="password"></div>
+                    <div id="check_box"><span id="check_box_text">同意條款</span><input type="checkbox" name="checkbox"></div>
+                    <div id="button"><button id="login_button" type="submit">登入</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
