@@ -9,18 +9,23 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+//使計算平方表單不繳交
+document.getElementById("count_input_form").addEventListener("submit", function(event) {
+    event.preventDefault();
+});
+
 
 document.addEventListener("DOMContentLoaded", function() {
-    let countButton = document.querySelector("#count_button");
-    let NumberInput = document.querySelector("#positive_number input[type='int']");
-    countButton.addEventListener("click", function(event) {
-        let inputValue = NumberInput.value.trim(); // 去除首尾空格
-        let isPositiveInteger =  Number.isInteger(Number(inputValue)) && Number(inputValue) > 0;
-        if (!isPositiveInteger) {
+    let Button = document.querySelector("#count_button");
+    let NumberInput = document.querySelector("#positive_number input[type='text']");
+    Button.addEventListener("click", function(event) {
+        let input = NumberInput.value.trim(); // 去除首尾空格
+        let isPositiveInt =  Number.isInteger(Number(input)) && Number(input) > 0;
+        if (isPositiveInt === false) {
             event.preventDefault(); 
             alert("Please enter a positive integer.");
         }else{
-            window.location.href = `/square/${inputValue}`;
+            window.location.href = "/square/"+input;
         }
     });
 });
