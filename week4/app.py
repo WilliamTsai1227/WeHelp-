@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, Form
+from fastapi import FastAPI, Request, Form 
 from fastapi.responses import RedirectResponse,HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -54,7 +54,7 @@ async def logout(request: Request):
 
 @app.get("/square/{positive_number}")
 async def square(request: Request, positive_number: str):
-     result = str(int(positive_number) ** 2)
-     return templates.TemplateResponse("Squared_Number_Page.html", {"Squared_Num": result, "request": request})
+    result = str(int(positive_number) ** 2)
+    return templates.TemplateResponse("Squared_Number_Page.html", {"Squared_Num": result, "request": request})
     
 
