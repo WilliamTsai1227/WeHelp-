@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
             event.preventDefault(); 
             alert("Please enter a positive integer.");
         }else{
-            window.location.href = "/square/"+input;
+            location.href = `/square/${input}` ;
         }
     });
 });
