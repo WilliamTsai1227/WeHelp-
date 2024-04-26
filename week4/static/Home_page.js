@@ -23,9 +23,9 @@ document.addEventListener("DOMContentLoaded", function() {
         let isPositiveInt =  Number.isInteger(Number(input)) && Number(input) > 0;
         if (isPositiveInt === false) {
             event.preventDefault(); 
-            alert("Please enter a positive integer.");
+            alert("Please enter a positive number.");
         }else{
-            location.href = `/square/${input}` ;
+            window.location.href = `/square/${input}`;
         }
     });
 });
