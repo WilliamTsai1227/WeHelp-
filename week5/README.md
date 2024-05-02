@@ -3,7 +3,8 @@
     ```sql
     CREATE DATABASE website;   
     SHOW DATABASES;
-![avatar](C:\Users\William\Desktop\Wehelp\week5\task2\task2-1.png)
+
+
 * Create a new table named member, in the website database.
     ```sql
     USE website;
