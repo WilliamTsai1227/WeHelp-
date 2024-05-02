@@ -3,9 +3,9 @@
     ```sql
     CREATE DATABASE website;   
     SHOW DATABASES;
-<center>
-    <img src=""/>
-</center>
+<p align="center">
+    <img src="https://github.com/WilliamTsai1227/WeHelp_stage1/blob/e3e08d75bd630d9b01b7e39045aa3b456ad9348d/week5/task_screenshot/task%202-1.png" />
+</p>
 
 * Create a new table named member, in the website database.
     ```sql
@@ -19,6 +19,13 @@
         time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
     SHOW TABLES;
+    DESCRIBE member;  
+
+<p align="center">
+    <img src="https://github.com/WilliamTsai1227/WeHelp_stage1/blob/e3e08d75bd630d9b01b7e39045aa3b456ad9348d/week5/task_screenshot/task2-2.png"/>
+    <img src="https://github.com/WilliamTsai1227/WeHelp_stage1/blob/e3e08d75bd630d9b01b7e39045aa3b456ad9348d/week5/task_screenshot/task2-2.2.png"/>
+</p>
+
 ## Task3
 * INSERT a new row to the member table where name, username and password must
 be set to test. INSERT additional 4 rows with arbitrary data.
