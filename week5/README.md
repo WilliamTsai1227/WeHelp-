@@ -3,7 +3,9 @@
     ```sql
     CREATE DATABASE website;   
     SHOW DATABASES;
-
+<center>
+    <img src=""/>
+</center>
 
 * Create a new table named member, in the website database.
     ```sql
