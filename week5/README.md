@@ -94,7 +94,7 @@ follower_count, from the member table.
         (2, 'This is william message', 100),
         (3, 'This is smith message', 120),
         (4, 'This is alice message', 50),
-        (5, 'This is bob message', 80);```
+        (5, 'This is bob message', 80);
  
 * SELECT all messages, including sender names. We have to JOIN the member table
 to get that.
