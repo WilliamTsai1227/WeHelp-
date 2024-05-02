@@ -148,7 +148,6 @@ follower_count, from the member table.
 
 * *INSERT some data into message TABLE*  
     ```sql
-    SELECT * FROM message;
     INSERT INTO message (member_id, content, like_count)
     VALUES 
         (1, 'This is test', 0),
@@ -156,6 +155,7 @@ follower_count, from the member table.
         (3, 'This is smith message', 120),
         (4, 'This is alice message', 50),
         (5, 'This is bob message', 80);
+    SELECT * FROM message;
 <p align="center">
     <img src="https://github.com/WilliamTsai1227/WeHelp_stage1/blob/aeaea5f80e84daee4971828de7f7eb1da3ee2401/week5/task_screenshot/task5/task5-1%20insert.png"/>
 </p>    
