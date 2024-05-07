@@ -4,7 +4,7 @@ body{
 #login_block{
     flex: none;
     display: grid;
-    height: 250px;
+    height: 100%;
     width: 100%;
     border-width:1px ;
     border-bottom: 1px solid gray;
@@ -24,14 +24,7 @@ body{
     font-size: 25px;
 }
 
-#content_block{
-    display: block;
-    margin-top: 30px;
-    width: 100%;
-    height: 250px;
-    justify-content: center;
-    align-items: center;
-}
+
 #login_system_div{
     display: flex;
     justify-content: center;
@@ -51,7 +44,9 @@ body{
 .content_block{
     display: block;
     width: 100%;
-    height: 200px;
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid gray;
@@ -76,10 +71,32 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px; /* 控制每个项目之间的间距 */
-    text-align: center; /* 水平居中文本 */
+    margin-bottom: 10px; 
     width: 100%;
-    font-size: bold;
+}
+.message_name{
+    display: flex;
+    max-width: max-content;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-weight: bolder;
+}
+.message_content{
+    display: flex;
+    max-width: max-content;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    width: 100%;
+}
+.message_check{
+    display: flex;
+    max-width: max-content;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    width: 100%;
 }
 #message_input_form{
     display: block;
