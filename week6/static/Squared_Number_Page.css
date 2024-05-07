@@ -1,0 +1,45 @@
+body{
+    margin: 0px;
+}
+#login_block{
+    flex: none;
+    display: grid;
+    width: 100%;
+    border-width:1px ;
+}
+#title_block{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    background-color: rgb(41, 34, 101);
+    width: 100%;
+    height: 100px;
+}
+#title_content{
+    color: aliceblue;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#content_block{
+    display: block;
+    width: 100%;
+    height: 250px;
+    margin-top: 30px;
+    justify-content: center;
+    align-items: center;
+}
+#squared_num_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+}
+#back_to_login_page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
