@@ -75,6 +75,8 @@ async def member(request: Request):
     if "SIGNED-IN" not in request.session or request.session["SIGNED-IN"] == False :
         return RedirectResponse(url="/")
     elif request.session["SIGNED-IN"] == True:
+        name = request.session["name"]
+        id = request.session["id"]
         con = mysql.connector.connect(
         user = "root",
         password = "12345678",
@@ -82,11 +84,28 @@ async def member(request: Request):
         database = "website"
         )
         cursor = con.cursor()
-        cursor.execute("SELECT member.name, message.content FROM member INNER JOIN message ON member.id = message.member_id ORDER BY message.time DESC;")
+        cursor.execute("SELECT member.name, message.content, message.member_id, message.id FROM member INNER JOIN message ON member.id = message.member_id ORDER BY message.time DESC;")
         data = cursor.fetchall()
-        formatted_result = ["{}: {}".format(item[0], item[1]) for item in data]
-        name = request.session["name"]
-        return templates.TemplateResponse("Success_page.html", {"result":formatted_result,"name":name,"request": request})
+        result = []
+        for item in data:
+            empty = []
+            check = ""
+            message_name = item[0]
+            message = item[1]
+            if id == item[2]:
+                check = '<form action="/deleteMessage" method="post"><button type="submit">X</button></form>'
+            message_id = item[3]
+            empty.append(message_name+":")
+            empty.append(message)
+            empty.append(check)
+            empty.append(message_id)
+            result.append(empty)
+            
+        # result = ["{}: {}".format(item[0], item[1]) for item in data]
+
+
+        
+        return templates.TemplateResponse("Success_page.html", {"result":result,"id":id,"name":name,"request": request})
 
 
 @app.get("/error")
@@ -114,9 +133,15 @@ async def createMessage(request: Request,message: str= Form(None)):
     con.close()
     return RedirectResponse(url="/member", status_code=303)
 
-@app.get("/square/{positive_number}")
-async def square(request: Request, positive_number: str):
-    result = str(int(positive_number) ** 2)
-    return templates.TemplateResponse("Squared_Number_Page.html", {"Squared_Num": result, "request": request})
+@app.post("/deleteMessage")
+async def deleteMessage(request: Request):
+    con = mysql.connector.connect(
+        user = "root",
+        password = "12345678",
+        host = "localhost",
+        database = "website"
+    )
+    cursor = con.cursor()
+
     
 
