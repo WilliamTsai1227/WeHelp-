@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/Success_page.css">
+    <title>會員頁面</title>
+</head>
+<body>
+    <div id="login_block">
+        <div id="title_block">
+            <div id="title_content">歡迎光臨，這是會員頁</div>
+        </div>
+        <div id="content_block">
+            <div id="login_system_div">{{name}}，歡迎登入系統</div>
+            <div id="signout"><a href="/signout" >登出系統</a></div>
+        </div>
+    </div>
+    <div class="content_block">
+        <div class="content_title">快來留言吧</div>
+        <div id="message_input_div">
+            <form id="message_input_form"action="/createMessage" method="post">
+                <div id="message_input"><span class="text">內容</span><input type="text" name="message"></div>   
+                <div id="button"><button id="submit_button" type="submit">送出</button></div>
+            </form>
+        </div>
+    </div>
+    <div class="content_block">
+        <div id="message_input_div">
+            {% for item in result %}
+                <div class="message_item">{{ item }}</br></div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
