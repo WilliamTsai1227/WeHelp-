@@ -90,22 +90,23 @@ async def member(request: Request):
         for item in data:
             empty = []
             check = ""
-            message_name = item[0]
+            message_username = item[0]
             message = item[1]
             if id == item[2]:
-                check = '<form action="/deleteMessage" method="post"><button type="submit">X</button></form>'
+                check = '<button type="submit">X</button>'
+            member_id = item[2]
             message_id = item[3]
-            empty.append(message_name+":")
+            empty.append(message_username+":")
             empty.append(message)
             empty.append(check)
             empty.append(message_id)
+            empty.append(member_id)
             result.append(empty)
-            
+        # result=[[message_username,message,check,message_id,member_id]....]
+        return templates.TemplateResponse("Success_page.html", {"result":result,"id":id,"name":name,"request": request})    
         # result = ["{}: {}".format(item[0], item[1]) for item in data]
 
-
         
-        return templates.TemplateResponse("Success_page.html", {"result":result,"id":id,"name":name,"request": request})
 
 
 @app.get("/error")
@@ -135,6 +136,13 @@ async def createMessage(request: Request,message: str= Form(None)):
 
 @app.post("/deleteMessage")
 async def deleteMessage(request: Request):
+    # 从请求体中获取 JSON 数据
+    message_data = await request.json()
+
+    # 获取messageId和memberId
+    messageId = message_data.get("messageId")
+    memberId = message_data.get("memberId")
+
     con = mysql.connector.connect(
         user = "root",
         password = "12345678",
@@ -142,6 +150,10 @@ async def deleteMessage(request: Request):
         database = "website"
     )
     cursor = con.cursor()
+    cursor.execute("DELETE FROM message WHERE id=%s",(messageId,))
+    con.commit()
+    con.close()
+    return RedirectResponse(url="/member", status_code=303)
 
     
 
