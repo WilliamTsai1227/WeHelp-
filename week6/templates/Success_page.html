@@ -30,13 +30,14 @@
                 <div class="message_item">
                     <div class="message_name">{{ item[0] }}</div>
                     <div class="message_content">{{ item[1] }}</div>
-                    <div class="message_check">{{ item[2]|safe }}</div>
+                    <div class="message_check">
+                        {{ item[2]|safe }}
+                        <div class="message_id">{{ item[3] }}</div>
+                        <div class="member_id">{{ item[4] }}</div>
+                    </div>     
                 </div>
             {% endfor %}
         </div>
-    </div>
-    <div id="id">
-        {{id}}
     </div>
 </body>
 </html>
