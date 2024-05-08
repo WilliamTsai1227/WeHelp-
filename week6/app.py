@@ -5,6 +5,8 @@ from fastapi.templating import Jinja2Templates
 from starlette.middleware.sessions import SessionMiddleware
 import mysql.connector
 
+
+
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
@@ -17,8 +19,7 @@ async def home(request: Request):
     if "SIGNED-IN" not in request.session or request.session["SIGNED-IN"] != True : #如果尚未登入，顯示home page
         return templates.TemplateResponse("Home_page.html",{"request": request})
     elif request.session["SIGNED-IN"] == True : #如果已經登入了顯示會員頁
-        name = request.session["name"]
-        return templates.TemplateResponse("Success_page.html", {"name":name , "request": request})
+        return RedirectResponse(url="/member", status_code=303)
     
 @app.post("/signup")
 async def signup(request: Request,register_name: str= Form(None),register_account: str= Form(None), register_password: str= Form(None)):
@@ -34,14 +35,14 @@ async def signup(request: Request,register_name: str= Form(None),register_accoun
     
     #創建cursor物件
     cursor = con.cursor()
-    cursor.execute("SELECT username FROM member WHERE username=%s",(account,))
+    cursor.execute("SELECT username FROM member WHERE username=%s",(account,)) #尋找相同帳號
     data = cursor.fetchall()
-    if data == []:
+    if data == []: #沒找到
         cursor.execute("INSERT INTO member(name,username,password) VALUES (%s,%s,%s)",(name,account,password))
         con.commit()
         con.close()
         return RedirectResponse(url="/", status_code=303)
-    if data != []:
+    if data != []: #找到相同帳號
         con.close()
         error_message = "Repeated username"
         return RedirectResponse(url=f"/error?message={error_message}", status_code=303)
@@ -61,13 +62,15 @@ async def signin(request: Request,account: str= Form(None), password: str= Form(
     cursor = con.cursor()
     cursor.execute("SELECT id, name, username, password FROM member WHERE username=%s AND password=%s",(account,password))
     data = cursor.fetchone()
+    con.close()
     if data == None:
         error_message = "帳號或密碼輸入錯誤"
         request.session["SIGNED-IN"] = False
         return RedirectResponse(url=f"/error?message={error_message}", status_code=303)
-    if account == data[2] or password == data[3]:
+    if account == data[2] and password == data[3]:     
         request.session.update({"SIGNED-IN": True, "id": data[0], "name": data[1], "username":data[2]})
         return RedirectResponse(url="/member", status_code=303)
+
 
 
 @app.get("/member")
@@ -75,9 +78,9 @@ async def member(request: Request):
     if "SIGNED-IN" not in request.session or request.session["SIGNED-IN"] == False :
         return RedirectResponse(url="/")
     elif request.session["SIGNED-IN"] == True:
-        name = request.session["name"]
-        id = request.session["id"]
-        con = mysql.connector.connect(
+        name = request.session["name"] #登入會員姓名
+        id = request.session["id"] #登入會員id
+        con = mysql.connector.connect( #連接資料庫
         user = "root",
         password = "12345678",
         host = "localhost",
@@ -88,23 +91,24 @@ async def member(request: Request):
         data = cursor.fetchall()
         result = []
         for item in data:
-            empty = []
-            check = ""
-            message_username = item[0]
-            message = item[1]
-            if id == item[2]:
-                check = '<button type="submit">X</button>'
-            member_id = item[2]
-            message_id = item[3]
+            empty = [] #之後要單獨存放每一筆資料的小list
+            check = "" 
+            message_username = item[0]  #留言人名稱
+            message = item[1] #留言內容
+            member_id = item[2] #留言會員id
+            message_id = item[3] #這則message id
+            if id == item[2]: #若登入id和留言會員id吻合，創造打叉按鈕
+                check = '<button>X</button>'
             empty.append(message_username+":")
             empty.append(message)
             empty.append(check)
             empty.append(message_id)
             empty.append(member_id)
-            result.append(empty)
-        # result=[[message_username,message,check,message_id,member_id]....]
-        return templates.TemplateResponse("Success_page.html", {"result":result,"id":id,"name":name,"request": request})    
-        # result = ["{}: {}".format(item[0], item[1]) for item in data]
+            result.append(empty) # result=[[message_username,message,check,message_id,member_id]....]
+        
+        con.close()
+        return templates.TemplateResponse("Success_page.html", {"result": result, "id": id, "name": name, "request": request}, headers={"Cache-Control": "no-cache, no-store, must-revalidate"})
+        
 
         
 
@@ -120,7 +124,7 @@ async def logout(request: Request):
 
 
 @app.post("/createMessage")
-async def createMessage(request: Request,message: str= Form(None)):
+async def createMessage(request: Request,message: str= Form("empty")):
     con = mysql.connector.connect(
         user = "root",
         password = "12345678",
@@ -128,21 +132,21 @@ async def createMessage(request: Request,message: str= Form(None)):
         database = "website"
     )
     cursor = con.cursor()
-    id = request.session["id"]
-    cursor.execute("INSERT INTO message(member_id,content) VALUES (%s,%s)",(id,message))
+    id = request.session["id"]  #現在的使用者id
+    cursor.execute("INSERT INTO message(member_id,content) VALUES (%s,%s)",(id,message)) #寫入message table 
     con.commit()
     con.close()
     return RedirectResponse(url="/member", status_code=303)
 
 @app.post("/deleteMessage")
 async def deleteMessage(request: Request):
-    # 从请求体中获取 JSON 数据
+    #從前端javascript拿到json格式資料
     message_data = await request.json()
 
-    # 获取messageId和memberId
-    messageId = message_data.get("messageId")
-    memberId = message_data.get("memberId")
-
+    # 解析出messageID及memberID
+    messageId = int(message_data.get("messageId")) #留言的使用者id 傳進來data type 為 str 要記得轉int
+    memberId = int(message_data.get("memberId")) #訊息的id 傳進來data type 為 str 要記得轉int
+    print(messageId,memberId)
     con = mysql.connector.connect(
         user = "root",
         password = "12345678",
@@ -150,8 +154,9 @@ async def deleteMessage(request: Request):
         database = "website"
     )
     cursor = con.cursor()
-    cursor.execute("DELETE FROM message WHERE id=%s",(messageId,))
-    con.commit()
+    if memberId == request.session["id"]: #如果這則留言的留言者id與現在的登入使用者id一樣了話允許刪除
+        cursor.execute("DELETE FROM message WHERE id=%s",(messageId,))
+        con.commit()
     con.close()
     return RedirectResponse(url="/member", status_code=303)
 
