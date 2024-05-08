@@ -99,7 +99,7 @@ body{
     width: 100%;
 }
 .message_id{
-    display: flex;
+    display: none;
     max-width: max-content;
     justify-content: center;
     align-items: center;
@@ -107,7 +107,7 @@ body{
     width: 100%;
 }
 .member_id{
-    display: flex;
+    display: none;
     max-width: max-content;
     justify-content: center;
     align-items: center;

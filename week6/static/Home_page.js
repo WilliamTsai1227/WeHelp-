@@ -25,32 +25,3 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    let Button = document.querySelector("#count_button");
-    let NumberInput = document.querySelector("#positive_number input[type='text']");
-    Button.addEventListener("click", function(event) {
-        let input = NumberInput.value.trim(); // 去除首尾空格
-        let isPositiveInt =  Number.isInteger(Number(input)) && Number(input) > 0;
-        if (isPositiveInt === false) {
-            event.preventDefault(); 
-            alert("Please enter a positive number.");
-        }else{
-            window.location.href = `/square/${input}`;
-        }
-    });
-});
-
-
-//做一個監聽完成document的
-document.addEventListener("DOMContentLoaded", function() {
-    let ac = document.querySelector("#account input[type = 'text']");
-    ac.addEventListener("keydown", function(e){
-        console.log(e.keyCode);
-    })
-
-})
