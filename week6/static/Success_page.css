@@ -98,6 +98,22 @@ body{
     margin-left: 10px;
     width: 100%;
 }
+.message_id{
+    display: flex;
+    max-width: max-content;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    width: 100%;
+}
+.member_id{
+    display: flex;
+    max-width: max-content;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    width: 100%;
+}
 #message_input_form{
     display: block;
     width: 500px;
