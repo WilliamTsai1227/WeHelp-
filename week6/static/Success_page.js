@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
         deleteButton.addEventListener("click", function(event) {
             let currentMessageCheck = event.target.closest(".message_check");
             let messageId = currentMessageCheck.querySelector("div[class='message_id']").innerText;
-            let memberId = currentMessageCheck.querySelector("div[class='member_id']").innerText;            
             let checkDelete = confirm("確定要刪除這則留言嗎？");
             if(checkDelete === false) {
                 event.preventDefault(); 
@@ -30,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     },
                     body: JSON.stringify({
                         messageId: messageId,
-                        memberId: memberId
                     })
                 })
                 .then(response => {
