@@ -154,7 +154,13 @@ async def deleteMessage(request: Request):
         database = "website"
     )
     cursor = con.cursor()
-    if memberId == request.session["id"]: #如果這則留言的留言者id與現在的登入使用者id一樣了話允許刪除
+    cursor.execute("SELECT member_id FROM message WHERE id=%s",(messageId,))
+    result = cursor.fetchone()
+    if result:
+        member_id = result[0]
+    print(member_id)
+    print(request.session["id"])
+    if member_id == request.session["id"]: #如果這則留言的留言者id與現在的登入使用者id一樣了話允許刪除
         cursor.execute("DELETE FROM message WHERE id=%s",(messageId,))
         con.commit()
     con.close()
