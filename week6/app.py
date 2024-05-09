@@ -97,14 +97,13 @@ async def member(request: Request):
             message = item[1] #留言內容
             member_id = item[2] #留言會員id
             message_id = item[3] #這則message id
-            if id == item[2]: #若登入id和留言會員id吻合，創造打叉按鈕
+            if id == member_id: #若登入id和留言會員id吻合，創造打叉按鈕
                 check = '<button>X</button>'
             empty.append(message_username+":")
             empty.append(message)
             empty.append(check)
             empty.append(message_id)
-            empty.append(member_id)
-            result.append(empty) # result=[[message_username,message,check,message_id,member_id]....]
+            result.append(empty) # result=[[message_username,message,check,message_id]....]
         
         con.close()
         return templates.TemplateResponse("Success_page.html", {"result": result, "id": id, "name": name, "request": request}, headers={"Cache-Control": "no-cache, no-store, must-revalidate"})
@@ -145,8 +144,8 @@ async def deleteMessage(request: Request):
 
     # 解析出messageID及memberID
     messageId = int(message_data.get("messageId")) #留言的使用者id 傳進來data type 為 str 要記得轉int
-    memberId = int(message_data.get("memberId")) #訊息的id 傳進來data type 為 str 要記得轉int
-    print(messageId,memberId)
+   
+    
     con = mysql.connector.connect(
         user = "root",
         password = "12345678",
