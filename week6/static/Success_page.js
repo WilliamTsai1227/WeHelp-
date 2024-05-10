@@ -16,8 +16,11 @@ document.addEventListener("DOMContentLoaded", function() {
     let deleteButtons = document.querySelectorAll(".message_check button");
     deleteButtons.forEach(function(deleteButton) {
         deleteButton.addEventListener("click", function(event) {
-            let currentMessageCheck = event.target.closest(".message_check");
-            let messageId = currentMessageCheck.querySelector("div[class='message_id']").innerText;
+            let tar_g = event.target
+            let currentMessageItem = event.target.closest(".message_item");
+            console.log(tar_g);
+            console.log(currentMessageItem);
+            let messageId = currentMessageItem.querySelector("div[class='message_id']").innerText;
             let checkDelete = confirm("確定要刪除這則留言嗎？");
             if(checkDelete === false) {
                 event.preventDefault(); 
