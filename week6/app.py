@@ -141,8 +141,9 @@ async def createMessage(request: Request,message: str= Form("empty")):
 async def deleteMessage(request: Request):
     #從前端javascript拿到json格式資料
     message_data = await request.json()
+    print(message_data)
 
-    # 解析出messageID及memberID
+    # 解析出messageID
     messageId = int(message_data.get("messageId")) #留言的使用者id 傳進來data type 為 str 要記得轉int
    
     
