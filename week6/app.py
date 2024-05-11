@@ -81,10 +81,10 @@ async def member(request: Request):
         name = request.session["name"] #登入會員姓名
         id = request.session["id"] #登入會員id
         con = mysql.connector.connect( #連接資料庫
-        user = "root",
-        password = "12345678",
-        host = "localhost",
-        database = "website"
+            user = "root",
+            password = "12345678",
+            host = "localhost",
+            database = "website"
         )
         cursor = con.cursor()
         cursor.execute("SELECT member.name, message.content, message.member_id, message.id FROM member INNER JOIN message ON member.id = message.member_id ORDER BY message.time DESC;")
@@ -141,12 +141,10 @@ async def createMessage(request: Request,message: str= Form("empty")):
 async def deleteMessage(request: Request):
     #從前端javascript拿到json格式資料
     message_data = await request.json()
-    print(message_data)
 
     # 解析出messageID
     messageId = int(message_data.get("messageId")) #留言的使用者id 傳進來data type 為 str 要記得轉int
    
-    
     con = mysql.connector.connect(
         user = "root",
         password = "12345678",
@@ -158,11 +156,9 @@ async def deleteMessage(request: Request):
     result = cursor.fetchone()
     if result:
         member_id = result[0]
-    print(member_id)
-    print(request.session["id"])
-    if member_id == request.session["id"]: #如果這則留言的留言者id與現在的登入使用者id一樣了話允許刪除
-        cursor.execute("DELETE FROM message WHERE id=%s",(messageId,))
-        con.commit()
+        if member_id == request.session["id"]: #如果這則留言的留言者id與現在的登入使用者id一樣了話允許刪除
+            cursor.execute("DELETE FROM message WHERE id=%s",(messageId,))
+            con.commit()
     con.close()
     return RedirectResponse(url="/member", status_code=303)
 
