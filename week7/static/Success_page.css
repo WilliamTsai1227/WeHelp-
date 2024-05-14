@@ -1,0 +1,185 @@
+body{
+    margin: 0px;
+}
+#login_block{
+    flex: none;
+    display: grid;
+    height: 100%;
+    width: 100%;
+    border-width:1px ;
+    border-bottom: 1px solid gray;
+}
+
+#title_block{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    background-color: rgb(41, 34, 101);
+    width: 100%;
+    height: 100px;
+}
+#title_content{
+    color: aliceblue;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+
+#login_system_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+}
+#signout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    font-size: 20px; 
+}
+.content_block{
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid gray;
+}
+.message_content_block{
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.query_content_block{
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.updatename_content_block{
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.content_title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+}
+#message_input_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.message_item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px; 
+    width: 100%;
+}
+.message_name{
+    display: flex;
+    max-width: max-content;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-weight: bolder;
+}
+.message_content{
+    display: flex;
+    max-width: max-content;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    width: 100%;
+}
+.message_check{
+    display: flex;
+    max-width: max-content;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    width: 100%;
+}
+.message_id{
+    display: none;
+    max-width: max-content;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    width: 100%;
+}
+#message_input_form{
+    display: block;
+    width: 500px;
+    margin-left: (100% - 500px) / 2;
+    margin-right: (100% - 500px) / 2;
+}
+#message_input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+}
+#query_username_input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+}
+#query_username_result{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+#update_myname_input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+}
+.text{
+    text-align: center;
+    font-size: 18px;
+    width: 45px;
+    margin-right: 7px
+}
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 4px;
+    margin-right: 4px;
+    height: 35px;
+}
+.submit_button{
+    width: 50px;
+}
