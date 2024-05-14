@@ -6,13 +6,13 @@ class ArrayDB{
         this.data = [];
         this.size = 0;
     }
-    push(value){
+    push(value){ //O(n)
         if(!this.contains(value)){
             this.size ++;
             this.data.push(value);
         }
     }
-    contains(value){
+    contains(value){ //O(n)
         for(let i =0;i<this.data.length;i++){
             if(this.data[i] == value){
                 return true;
@@ -20,7 +20,7 @@ class ArrayDB{
         }
         return false;
     }
-    list(){
+    list(){ //O(n*logn)
         return this.data.toSorted()
     }
 }
@@ -58,7 +58,7 @@ class BSTDB{
         this.root = null;
         this.size = 0;
     }
-    push(value){
+    push(value){ //O(logn)
         let node = this.root;
         if(node === null){    //如果根節點為空
             this.root = new Node(value, null, null);
@@ -89,7 +89,7 @@ class BSTDB{
             }
         }
     }
-    contains(value){
+    contains(value){ //O(logn)
         let node = this.root;
         if(node === null){    //如果根節點為空
             return false;
@@ -115,7 +115,7 @@ class BSTDB{
         }
         return false;
     }
-    list(){
+    list(){ //O(n)
         let node = this.root;
         let stack = [];
         let result = [];
