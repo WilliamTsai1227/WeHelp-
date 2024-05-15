@@ -46,49 +46,67 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-//當使用者按下查詢用戶帳號，將資訊丟到後端
+//當使用者按下查詢用戶帳號
 document.addEventListener("DOMContentLoaded", function() {
     let queryButton = document.querySelector("#query_username_input button[type='submit']");
     queryButton.addEventListener("click", function() {
         let queryInput = document.querySelector("#query_username_input input[type='text']").value;
         fetch(`/api/member?username=${queryInput}`)
-            .then(response => response.json())
+            .then(response => {
+                document.querySelector("#query_username_input input[type='text']").value = '';
+                return response.json()
+            })
             .then(data => {
                 let resultDiv = document.querySelector("#query_username_result");
                 if (data.data) {
-                    resultDiv.textContent = `${data.data.name}`;
+                    resultDiv.textContent = `${data.data.name}(${data.data.username})`;
                 } else {
-                    resultDiv.textContent = "No Data";
-                }
+                    resultDiv.textContent = "無此會員";
+                }  
             })
             .catch(error => {
                 console.error("Error:", error);
             });
-    });  
+    });
+    
 });
 
 
-//當使用者按下更改本身用戶名稱，將資訊丟到後端
+//當使用者按下更改本身用戶名稱
 document.addEventListener("DOMContentLoaded", function() {
     let updateNameButton = document.querySelector("#update_myname_input button[type='submit']");
     updateNameButton .addEventListener("click", function() {
-        let queryInput = document.querySelector("#update_myname_input input[type='text']").value;
+        let newNameInput = document.querySelector("#update_myname_input input[type='text']").value;
+        if(newNameInput === ''){
+            alert("你尚未輸入新姓名");
+            return;
+        }
         const requestOptions = {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name:queryInput})
-          };
+            body: JSON.stringify({"name":newNameInput})
+        }
         fetch('/api/member', requestOptions)
             .then(response =>{
+                document.querySelector("#update_myname_input input[type='text']").value = '';
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                   }
-                  return response.json();
+                return response.json();
             })
             .then(data => {
-                console.log('Success:', data);
+                let updateUserNameResult = document.querySelector(".updatename_content_block div[id='update_username_result']");
+                let WelcomeTitle = document.querySelector(".content_block div[id='login_system_div']");
+                if(data == null){
+                    updateUserNameResult.textContent = "更新失敗";
+                }else if(data.ok === true){
+                    WelcomeTitle.textContent = `${newNameInput}，歡迎登入系統`;;
+                    updateUserNameResult.textContent = "更新成功";
+                }else if(data.error === true ){
+                    updateUserNameResult.textContent = "更新失敗";
+                }    
             })
             .catch(error => {
                 console.error("Error:", error);

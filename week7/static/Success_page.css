@@ -159,6 +159,12 @@ body{
     align-items: center;
     width: 100%;
 }
+#update_username_result{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 #update_myname_input{
     display: flex;
     justify-content: center;
