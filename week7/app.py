@@ -80,8 +80,8 @@ async def member(request: Request):
     if "SIGNED-IN" not in request.session or request.session["SIGNED-IN"] == False :
         return RedirectResponse(url="/")
     elif request.session["SIGNED-IN"] == True:
-        name = request.session["name"] #登入會員姓名
         id = request.session["id"] #登入會員id
+        print(type(id))
         con = mysql.connector.connect( #連接資料庫
             user = "root",
             password = "12345678",
@@ -89,6 +89,9 @@ async def member(request: Request):
             database = "website"
         )
         cursor = con.cursor()
+        cursor.execute("SELECT name FROM member WHERE id=%s",(id,)) #現在這個會員的姓名
+        name_list=cursor.fetchone()
+        name = name_list[0]
         cursor.execute("SELECT member.name, message.content, message.member_id, message.id FROM member INNER JOIN message ON member.id = message.member_id ORDER BY message.time DESC;")
         data = cursor.fetchall()
         result = []
@@ -144,28 +147,29 @@ async def query_member(request: Request, username: str = Query(..., description=
 async def update_member_name(request: Request):
     if request.session["SIGNED-IN"] == True:
         update_data = await request.json()
-        print(update_data)
         new_name = update_data.get("name")
-        print(type(new_name))
-        user_id = request.session["id"] 
-        print(type(user_id))
-        con = mysql.connector.connect( 
-                user = "root",
-                password = "12345678",
-                host = "localhost",
-                database = "website"
-            )
-        cursor = con.cursor()
-        cursor.execute("UPDATE member SET name = %s WHERE id= %s",(new_name,user_id))
-        con.close()
-        if cursor.rowcount > 0:
-            # 更新成功
-            return {"ok":"true"}
-        else:
-            # 更新失败
-            return {"error":"true"}
+        if new_name == "":
+            return {"error":False}
+        if new_name != "":
+            user_id = request.session["id"] 
+            con = mysql.connector.connect( 
+                    user = "root",
+                    password = "12345678",
+                    host = "localhost",
+                    database = "website"
+                )
+            cursor = con.cursor()
+            cursor.execute("UPDATE member SET name = %s WHERE id= %s",(new_name,user_id))
+            con.commit()
+            con.close()
+            if cursor.rowcount > 0:
+                # 更新成功
+                return {"ok":True}
+            else:
+                # 更新失败
+                return {"error":False}
     else:
-        return {"error":"true"}       
+        return {"error":True}       
 
 
 
