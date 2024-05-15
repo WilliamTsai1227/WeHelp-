@@ -142,10 +142,13 @@ async def query_member(request: Request, username: str = Query(..., description=
 
 @app.patch("/api/member")
 async def update_member_name(request: Request):
-    # if request.session["SIGNED-IN"] == True:
+    if request.session["SIGNED-IN"] == True:
         update_data = await request.json()
+        print(update_data)
         new_name = update_data.get("name")
-        # username = request.session["username"] 
+        print(type(new_name))
+        user_id = request.session["id"] 
+        print(type(user_id))
         con = mysql.connector.connect( 
                 user = "root",
                 password = "12345678",
@@ -153,7 +156,7 @@ async def update_member_name(request: Request):
                 database = "website"
             )
         cursor = con.cursor()
-        cursor.execute("UPDATE member SET name = %s WHERE username='test'",(new_name,))
+        cursor.execute("UPDATE member SET name = %s WHERE id= %s",(new_name,user_id))
         con.close()
         if cursor.rowcount > 0:
             # 更新成功
@@ -161,7 +164,7 @@ async def update_member_name(request: Request):
         else:
             # 更新失败
             return {"error":"true"}
-    # else:
+    else:
         return {"error":"true"}       
 
 
