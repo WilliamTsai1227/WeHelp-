@@ -115,7 +115,9 @@ async def member(request: Request):
     
 @app.get("/api/member")
 async def query_member(request: Request, username: str = Query(..., description="要查詢的會員帳號"), ):
-    if request.session["SIGNED-IN"] == True:
+    if "SIGNED-IN" not in request.session or request.session["SIGNED-IN"] == False :
+        return {"data": None}
+    elif request.session["SIGNED-IN"] == True:
         con = mysql.connector.connect( 
                 user = "root",
                 password = "12345678",
@@ -141,15 +143,18 @@ async def query_member(request: Request, username: str = Query(..., description=
         # 如果找不到匹配的会员
         return {"data": None}
     
+    
 
 
 @app.patch("/api/member")
 async def update_member_name(request: Request):
-    if request.session["SIGNED-IN"] == True:
+    if "SIGNED-IN" not in request.session or request.session["SIGNED-IN"] == False :
+        return {"error":True} 
+    elif request.session["SIGNED-IN"] == True:
         update_data = await request.json()
-        new_name = update_data.get("name")
+        new_name = update_data.get("name").strip()
         if new_name == "":
-            return {"error":False}
+            return {"error":True}
         if new_name != "":
             user_id = request.session["id"] 
             con = mysql.connector.connect( 
