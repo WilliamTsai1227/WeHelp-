@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", function() {
     let updateNameButton = document.querySelector("#update_myname_input button[type='submit']");
     updateNameButton .addEventListener("click", function() {
-        let newNameInput = document.querySelector("#update_myname_input input[type='text']").value;
+        let newNameInput = document.querySelector("#update_myname_input input[type='text']").value.trim();
         if(newNameInput === ''){
             alert("你尚未輸入新姓名");
             return;
