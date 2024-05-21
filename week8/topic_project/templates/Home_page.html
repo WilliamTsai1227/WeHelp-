@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/Home_page.css">
+    <script src="/static/Home_page.js" defer></script>
+    <title>登入頁面</title>
+</head>
+<body>
+    <div id="login_block">
+        <div id="title_block">
+            <div id="title_content">歡迎光臨，請註冊登入系統</div>
+        </div>
+        <div class="content_block">
+            <div class="content_title">註冊帳號</div>
+            <div id="register_input_div">
+                <form id="register_input_form"action="/signup" method="post">
+                    <div id="register_name"><span class="text">姓名</span><input type="text" name="register_name"></div> 
+                    <div id="register_account"><span class="text">帳號</span><input type="text" name="register_account"></div>   
+                    <div id="register_password"><span class="text">密碼</span><input type="password" name="register_password"></div>
+                    <div class="button"><button id="register_button" type="submit">註冊</button></div>
+                </form>
+            </div>
+        </div>
+        <div class="content_block">
+            <div class="content_title">登入系統</div>
+            <div id="login_input_div">
+                <form id="login_input_form"action="/signin" method="post">
+                    <div id="account"><span class="text">帳號</span><input type="text" name="account"></div>   
+                    <div id="password"><span class="text">密碼</span><input type="password" name="password"></div>
+                    <div class="button"><button id="login_button" type="submit">登入</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
