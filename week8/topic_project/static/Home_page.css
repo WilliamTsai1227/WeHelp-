@@ -150,3 +150,9 @@ body{
 #count_button{
     width: 50px;
 }
+.alert-div{
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
