@@ -23,19 +23,13 @@ def verify_NotEmpty_input(name,account,password):
     return True
 #verify password format and length
 def verify_password(password,min_length,max_length):
+    lowercase = re.search(r'[a-z]',password)
+    uppercase = re.search(r'[A-Z]',password)
+    is_number = re.search(r'\d',password)
+    is_special_letters = re.search(r'[@#$%]',password)
     if len(password)< min_length or len(password)>max_length:
         return False
-    if re.search(r'/[a-z]/',password) is None:
-        print("a")
-        return False
-    if re.search(r'/[A-Z]/',password) is None:
-        print("b")
-        return False
-    if re.search(r'/\d/',password) is None:
-        print("c")
-        return False
-    if re.search(r'/[@#$%]/',password) is None:
-        print("d")
+    if lowercase is None or uppercase is None or is_number is None or is_special_letters is None:
         return False
     return True
 
