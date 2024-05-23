@@ -40,7 +40,7 @@ function checkFormat(input){
 
 
 
-//如果沒輸入完整資訊便要註冊，要防止提交
+//如果輸入資訊不符合規範要註冊，要防止提交
 function checkRegister(){
     let registerButton = document.querySelector("#register_button");
     let alertElement = document.querySelector("#register_input_form div[class='alert-div']");
@@ -62,7 +62,7 @@ function checkRegister(){
 }
 
 
-//如果沒輸入完整資訊便要登入，要防止提交
+//如果輸入資訊不符合規範要登入，要防止提交
 function checkLogin(){
     let loginButton = document.querySelector("#login_button");
     let alertElement = document.querySelector("#login_input_form div[class='alert-div']");
@@ -84,6 +84,6 @@ function checkLogin(){
 }
 
 
-// checkRegister();
-// checkLogin();
+checkRegister();
+checkLogin();
 
